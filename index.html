@@ -81,12 +81,10 @@ preload_images = [
 
     var blank = '<img src = resources/images/BLANK.png height = 250 width = 250> </img>'
     var whitespace = '<p><font color = white> text </font></p>' //white space line for formatting
-    var stim_cue_text = whitespace;
     var stim_off = '<img src = resources/images/GREY.png height = 200 width = 200> </img>';
-    var stim_off_text = whitespace;
     var outcome_display = '<img src = resources/images/shock.png height = 250 width = 250> </img>';
-    var outcome_text = "<p> Mr X was shocked!</p>";
-    var nooutcome_text = '<p> Mr X was not shocked </p>';
+    var outcome_text = "<p>Mr X was shocked!</p>";
+    var nooutcome_text = '<p>Mr X was not shocked</p>';
 
     if (cb < 4) {
     var stim_cue1 = '<img src = resources/images/BLUE.png height = 200 width = 200> </img>';
@@ -100,10 +98,10 @@ preload_images = [
     cue2_colour = "blue";
     }
 
-  // console.log('group ' + group);
-  // console.log('group' + groupname);
-  // console.log('cb' + cb);
-  // console.log('stim 1' + cue1_colour);
+  console.log('group ' + group);
+  console.log('group ' + groupname);
+  console.log('cb ' + cb);
+  console.log('stim 1 ' + cue1_colour);
 
 
   var demographics_age = {
@@ -151,23 +149,39 @@ preload_images = [
   // group 2 sees a medicine followed by healthy or no recovery, )
 
   // 1 cue trials
-  var cueon1_display = {
+  var cueon1_display_delay = {
     type: "html-keyboard-response",
     stimulus: stim_cue1 +
-      stim_cue_text +
+      whitespace +
       blank +
+      whitespace +
       whitespace +
       whitespace,
     response_ends_trial: false,
     trial_duration: 1000
   };
 
+  var cueon1_display_prompt = {
+    type: "html-button-response",
+    stimulus: stim_cue1 +
+      whitespace +
+      blank +
+      whitespace,
+    choices: [
+      "No shock",
+      "Shock"
+    ],
+    prompt: "<p> </p>" +
+    "<p>Do you predict there will be a shock or no shock?</p>"
+  };
+
   var outcome_cueon1_delay = {
     type: "html-keyboard-response",
     stimulus: stim_cue1 +
-    stim_cue_text +
+    whitespace +
     outcome_display +
     outcome_text +
+    whitespace +
     whitespace,
     response_ends_trial: false,
     trial_duration: 1000,
@@ -176,9 +190,10 @@ preload_images = [
   var outcome_cueon1_prompt = {
     type: "html-keyboard-response",
     stimulus: stim_cue1 +
-    stim_cue_text +
+    whitespace +
     outcome_display +
     outcome_text +
+    whitespace +
     "<p> Press the spacebar to continue </p>",
     choices: [32],
     post_trial_gap: 300,
@@ -192,8 +207,9 @@ preload_images = [
   var nooutcome_cueon1_delay = {
     type: "html-keyboard-response",
     stimulus: stim_cue1 +
-    stim_cue_text +
+    whitespace +
     blank +
+    whitespace +
     nooutcome_text +
     whitespace,
     response_ends_trial: false,
@@ -203,8 +219,9 @@ preload_images = [
   var nooutcome_cueon1_prompt = {
     type: "html-keyboard-response",
     stimulus: stim_cue1 +
-    stim_cue_text +
+    whitespace +
     blank +
+    whitespace +
     nooutcome_text +
     '<p> Press the spacebar to continue </p>',
     choices: [32],
@@ -216,87 +233,104 @@ preload_images = [
     }
   };
 
-  var cueon2_display = {
-    type: "html-keyboard-response",
-    stimulus: stim_cue2 +
-      stim_cue_text +
-      blank +
-      whitespace +
-      whitespace,
-    response_ends_trial: false,
-    trial_duration: 1000
-  };
+// second cue for second contingency
+  // var cueon2_display = {
+  //   type: "html-keyboard-response",
+  //   stimulus: stim_cue2 +
+  //     stim_cue_text +
+  //     blank +
+  //     whitespace +
+  //     whitespace,
+  //   response_ends_trial: false,
+  //   trial_duration: 1000
+  // };
 
-  var outcome_cueon2_delay = {
-    type: "html-keyboard-response",
-    stimulus: stim_cue2 +
-    stim_cue_text +
-    outcome_display +
-    outcome_text +
-    whitespace,
-    response_ends_trial: false,
-    trial_duration: 1000,
-  };
+  // var outcome_cueon2_delay = {
+  //   type: "html-keyboard-response",
+  //   stimulus: stim_cue2 +
+  //   stim_cue_text +
+  //   outcome_display +
+  //   outcome_text +
+  //   whitespace,
+  //   response_ends_trial: false,
+  //   trial_duration: 1000,
+  // };
 
-  var outcome_cueon2_prompt = {
-    type: "html-keyboard-response",
-    stimulus: stim_cue2 +
-    stim_cue_text +
-    outcome_display +
-    outcome_text +
-    "<p> Press the spacebar to continue </p>",
-    choices: [32],
-    post_trial_gap: 300,
-    on_finish: function (data) {
-      trial_num++;
-      // console.log(trial_num);
-      jsPsych.data.get().addToLast({ trial_num: trial_num });
-    }
-  };
+  // var outcome_cueon2_prompt = {
+  //   type: "html-keyboard-response",
+  //   stimulus: stim_cue2 +
+  //   stim_cue_text +
+  //   outcome_display +
+  //   outcome_text +
+  //   "<p> Press the spacebar to continue </p>",
+  //   choices: [32],
+  //   post_trial_gap: 300,
+  //   on_finish: function (data) {
+  //     trial_num++;
+  //     // console.log(trial_num);
+  //     jsPsych.data.get().addToLast({ trial_num: trial_num });
+  //   }
+  // };
 
-  var nooutcome_cueon2_delay = {
-    type: "html-keyboard-response",
-    stimulus: stim_cue2 +
-    stim_cue_text +
-    blank +
-    nooutcome_text +
-    whitespace,
-    response_ends_trial: false,
-    trial_duration: 1000
-  }
+  // var nooutcome_cueon2_delay = {
+  //   type: "html-keyboard-response",
+  //   stimulus: stim_cue2 +
+  //   stim_cue_text +
+  //   blank +
+  //   nooutcome_text +
+  //   whitespace,
+  //   response_ends_trial: false,
+  //   trial_duration: 1000
+  // }
 
-  var nooutcome_cueon2_prompt = {
-    type: "html-keyboard-response",
-    stimulus: stim_cue2 +
-    stim_cue_text +
-    blank +
-    nooutcome_text +
-    '<p> Press the spacebar to continue </p>',
-    choices: [32],
-    post_trial_gap: 300,
-    on_finish: function (data) {
-      trial_num++;
-      // console.log(trial_num);
-      jsPsych.data.get().addToLast({ trial_num: trial_num });
-    }
-  };
+  // var nooutcome_cueon2_prompt = {
+  //   type: "html-keyboard-response",
+  //   stimulus: stim_cue2 +
+  //   stim_cue_text +
+  //   blank +
+  //   nooutcome_text +
+  //   '<p> Press the spacebar to continue </p>',
+  //   choices: [32],
+  //   post_trial_gap: 300,
+  //   on_finish: function (data) {
+  //     trial_num++;
+  //     // console.log(trial_num);
+  //     jsPsych.data.get().addToLast({ trial_num: trial_num });
+  //   }
+  // };
 
-  var cueoff_display = {
+  var cueoff_display_delay = {
     type: "html-keyboard-response",
     stimulus: stim_off +
-    stim_off_text +
+    whitespace +
     blank +
-      whitespace +
-      whitespace,
+    whitespace +
+    whitespace +
+    whitespace,
     response_ends_trial: false,
     trial_duration: 1000,
+  };
+
+  var cueoff_display_prompt = {
+    type: "html-button-response",
+    stimulus: stim_off +
+    whitespace +
+    blank +
+    whitespace ,
+    choices: [
+      "No shock",
+      "Shock"
+    ],
+    prompt: "<p> </p>" +
+    "<p>Do you predict there will be a shock or no shock?</p>"
   };
 
   var outcome_cueoff_delay = {
     type: "html-keyboard-response",
     stimulus: stim_off +
-    stim_off_text +
+    whitespace +
       outcome_display +
+      whitespace +
       outcome_text +
       whitespace,
     response_ends_trial: false,
@@ -306,8 +340,9 @@ preload_images = [
   var outcome_cueoff_prompt = {
     type: "html-keyboard-response",
     stimulus: stim_off +
-    stim_off_text +
+    whitespace +
       outcome_display +
+      whitespace +
       outcome_text +
       "<p> Press the spacebar to continue </p>",
     choices: [32],
@@ -322,8 +357,9 @@ preload_images = [
   var nooutcome_cueoff_delay = {
     type: "html-keyboard-response",
     stimulus: stim_off +
-    stim_off_text +
+    whitespace +
     blank +
+    whitespace+
     nooutcome_text +
     whitespace,
     response_ends_trial: false,
@@ -333,7 +369,8 @@ preload_images = [
   var nooutcome_cueoff_prompt = {
     type: "html-keyboard-response",
     stimulus: stim_off +
-    stim_off_text +
+    whitespace +
+    whitespace +
     blank +
     nooutcome_text +
     '<p> Press the spacebar to continue </p>',
@@ -351,7 +388,8 @@ preload_images = [
 
     var training_trialA_cue1 = {
       timeline: [
-        cueon1_display,
+        cueon1_display_delay,
+        cueon1_display_prompt,
         outcome_cueon1_delay,
         outcome_cueon1_prompt
       ],
@@ -363,7 +401,8 @@ preload_images = [
 
     var training_trialB_cue1 = {
       timeline: [
-        cueon1_display,
+        cueon1_display_delay,
+        cueon1_display_prompt,
         nooutcome_cueon1_delay,
         nooutcome_cueon1_prompt
       ],
@@ -372,33 +411,35 @@ preload_images = [
         trialtype: 'B',
       },
     };
-    var training_trialA_cue2 = {
-      timeline: [
-        cueon2_display,
-        outcome_cueon2_delay,
-        outcome_cueon2_prompt
-      ],
-      data: {
-        phase: 'training',
-        trialtype: 'A',
-      },
-    };
 
-    var training_trialB_cue2 = {
-      timeline: [
-        cueon2_display,
-        nooutcome_cueon2_delay,
-        nooutcome_cueon2_prompt
-      ],
-      data: {
-        phase: 'training',
-        trialtype: 'B',
-      },
-    };
+    // var training_trialA_cue2 = {
+    //   timeline: [
+    //     cueon2_display,
+    //     outcome_cueon2_delay,
+    //     outcome_cueon2_prompt
+    //   ],
+    //   data: {
+    //     phase: 'training',
+    //     trialtype: 'A',
+    //   },
+    // };
+
+    // var training_trialB_cue2 = {
+    //   timeline: [
+    //     cueon2_display,
+    //     nooutcome_cueon2_delay,
+    //     nooutcome_cueon2_prompt
+    //   ],
+    //   data: {
+    //     phase: 'training',
+    //     trialtype: 'B',
+    //   },
+    // };
 
     var training_trialC = {
       timeline: [
-        cueoff_display,
+        cueoff_display_delay,
+        cueoff_display_prompt,
         outcome_cueoff_delay,
         outcome_cueoff_prompt
       ],
@@ -410,7 +451,8 @@ preload_images = [
 
     var training_trialD = {
       timeline: [
-        cueoff_display,
+        cueoff_display_delay,
+        cueoff_display_prompt,
         nooutcome_cueoff_delay,
         nooutcome_cueoff_prompt
       ],
@@ -453,20 +495,20 @@ preload_images = [
 // lowered number of training trials because experiment has 6 training phases
   num_training_trialblocks = 2;
 
-  var pos_num_training_trialA = 8; 
-  var pos_num_training_trialB = 4; 
-  var pos_num_training_trialC = 2; 
-  var pos_num_training_trialD = 2;
+  var pos_num_training_trialA = 7; 
+  var pos_num_training_trialB = 1; 
+  var pos_num_training_trialC = 1; 
+  var pos_num_training_trialD = 7;
 
-  var nul_num_training_trialA = 9; 
-  var nul_num_training_trialB = 3; 
-  var nul_num_training_trialC = 3; 
-  var nul_num_training_trialD = 1;
+  var nul_num_training_trialA = 4; 
+  var nul_num_training_trialB = 4; 
+  var nul_num_training_trialC = 4; 
+  var nul_num_training_trialD = 4;
 
-  var neg_num_training_trialA = 2; 
-  var neg_num_training_trialB = 2; 
-  var neg_num_training_trialC = 8; 
-  var neg_num_training_trialD = 4;
+  var neg_num_training_trialA = 1; 
+  var neg_num_training_trialB = 7; 
+  var neg_num_training_trialC = 7; 
+  var neg_num_training_trialD = 1;
 
   temp_training_blockorder_1 = [];
   temp_training_blockorder_2 = [];
@@ -532,11 +574,11 @@ preload_images = [
 // set up blocks for the null contingency in second half of experiment
 for (var j = 1; j <= num_training_trialblocks; j++) {
   for (var i = 1; i <= nul_num_training_trialA; i++) {
-      temp_training_blockorder_2 = temp_training_blockorder_2.concat(training_trialA_cue2)
+      temp_training_blockorder_2 = temp_training_blockorder_2.concat(training_trialA_cue1)
     };
 
   for (var i = 1; i <= nul_num_training_trialB; i++) {
-    temp_training_blockorder_2 = temp_training_blockorder_2.concat(training_trialB_cue2)
+    temp_training_blockorder_2 = temp_training_blockorder_2.concat(training_trialB_cue1)
   };
 
   for (var i = 1; i <= nul_num_training_trialC; i++) {
@@ -609,45 +651,45 @@ for (var j = 1; j <= num_training_trialblocks; j++) {
       },
     };
 
-    var test_causalratings_cue2 = {
-    type: "html-slider-response",
-    stimulus: stim_cue2,
-    labels: [
-      "<p> Definitely prevents shock </p>",
-      "<p> Has no effect on shock </p>",
-      "<p> Definitely causes shock <p>"
-    ],
-    button_label: "Continue",
-    require_movement: true,
-    prompt: "<p> To what extent does this light cause or prevent shock? </p>",
-    post_trial_gap: 250,
-    min: -100,
-    max: 100,
-    start: 0,
-    data: {
-      trialtype: "cr_cue",
-      trialcategory: "cr"
-    },
-  };
+  //   var test_causalratings_cue2 = {
+  //   type: "html-slider-response",
+  //   stimulus: stim_cue2,
+  //   labels: [
+  //     "<p> Definitely prevents shock </p>",
+  //     "<p> Has no effect on shock </p>",
+  //     "<p> Definitely causes shock <p>"
+  //   ],
+  //   button_label: "Continue",
+  //   require_movement: true,
+  //   prompt: "<p> To what extent does this light cause or prevent shock? </p>",
+  //   post_trial_gap: 250,
+  //   min: -100,
+  //   max: 100,
+  //   start: 0,
+  //   data: {
+  //     trialtype: "cr_cue",
+  //     trialcategory: "cr"
+  //   },
+  // };
 
-  var test_frequency_cueon2 = {
-      type: "html-slider-response",
-      stimulus: stim_cue2,
-      labels: [
-        "<p> Shocked 0 times </p>",
-        "<p> Shocked 50 times </p>",
-        "<p> Shocked 100 times <p>"
-      ],
-      button_label: "Continue",
-      require_movement: true,
-      prompt: "<p> Imagine Mr X observed the shock machine 100 times and <b>only</b> saw this light.</p>" +
-        "<p> How many times out of 100 do you predict Mr X will be shocked? </p>",
-      post_trial_gap: 250,
-      data: {
-        trialtype: "fr_cue",
-        trialcategory: "fr"
-      },
-    };
+  // var test_frequency_cueon2 = {
+  //     type: "html-slider-response",
+  //     stimulus: stim_cue2,
+  //     labels: [
+  //       "<p> Shocked 0 times </p>",
+  //       "<p> Shocked 50 times </p>",
+  //       "<p> Shocked 100 times <p>"
+  //     ],
+  //     button_label: "Continue",
+  //     require_movement: true,
+  //     prompt: "<p> Imagine Mr X observed the shock machine 100 times and <b>only</b> saw this light.</p>" +
+  //       "<p> How many times out of 100 do you predict Mr X will be shocked? </p>",
+  //     post_trial_gap: 250,
+  //     data: {
+  //       trialtype: "fr_cue",
+  //       trialcategory: "fr"
+  //     },
+  //   };
 
     var test_frequency_cueoff = {
       type: "html-slider-response",
@@ -684,21 +726,21 @@ for (var j = 1; j <= num_training_trialblocks; j++) {
     }
   };
 
-  var test_openend_causalrelationship_cue2 = {
-    type: "survey-text",
-    questions: [
-      { prompt: 
-        stim_cue2 +
-      "<p>In a few sentences, how did you determine whether there was a causal relationship or not between the <b>" +cue2_colour + "</b> light and shock?</p>" +
-      "<p>Please do not leave this blank. Any information you can provide is useful.</p>", 
-      rows: 10, columns: 80 },
-    ],
-    post_trial_gap: 250,
-    data: {
-      trialtype: "oe_cr",
-      trialcategory: "oe",
-    }
-  };
+  // var test_openend_causalrelationship_cue2 = {
+  //   type: "survey-text",
+  //   questions: [
+  //     { prompt: 
+  //       stim_cue2 +
+  //     "<p>In a few sentences, how did you determine whether there was a causal relationship or not between the <b>" +cue2_colour + "</b> light and shock?</p>" +
+  //     "<p>Please do not leave this blank. Any information you can provide is useful.</p>", 
+  //     rows: 10, columns: 80 },
+  //   ],
+  //   post_trial_gap: 250,
+  //   data: {
+  //     trialtype: "oe_cr",
+  //     trialcategory: "oe",
+  //   }
+  // };
 
   var test_openend_othercauses = {
     type: "survey-text",
@@ -740,11 +782,11 @@ for (var j = 1; j <= num_training_trialblocks; j++) {
       ]),
     };
 
-    var test_causalratings_block_cue2 = {
-      timeline: jsPsych.randomization.shuffle([
-        test_causalratings_cue2,
-      ]),
-    };
+    // var test_causalratings_block_cue2 = {
+    //   timeline: jsPsych.randomization.shuffle([
+    //     test_causalratings_cue2,
+    //   ]),
+    // };
 
     var test_frequency_block_cue1 = {
       timeline: jsPsych.randomization.shuffle([
@@ -753,12 +795,12 @@ for (var j = 1; j <= num_training_trialblocks; j++) {
       ]),
     };
 
-    var test_frequency_block_cue2 = {
-      timeline: jsPsych.randomization.shuffle([
-        test_frequency_cueon2,
-        test_frequency_cueoff,
-      ]),
-    };
+    // var test_frequency_block_cue2 = {
+    //   timeline: jsPsych.randomization.shuffle([
+    //     test_frequency_cueon2,
+    //     test_frequency_cueoff,
+    //   ]),
+    // };
 
 var timeline_test_trials_pretest1 = {
   timeline: [
@@ -793,10 +835,10 @@ var timeline_test_trials_interim2 = {
   },
 };
 
-var timeline_test_trials_pretest2 = {
+var timeline_test_trials_interim3 = {
   timeline: [
-    test_causalratings_block_cue2,
-    test_frequency_block_cue2
+    test_causalratings_block_cue1,
+    test_frequency_block_cue1,
   ],
   data: {
     phase: 'test',
@@ -804,11 +846,10 @@ var timeline_test_trials_pretest2 = {
   },
 };
 
-
-var timeline_test_trials_interim3 = {
+var timeline_test_trials_interim4 = {
   timeline: [
-    test_causalratings_block_cue2,
-    test_frequency_block_cue2,
+    test_causalratings_block_cue1,
+    test_frequency_block_cue1,
   ],
   data: {
     phase: 'test',
@@ -816,29 +857,17 @@ var timeline_test_trials_interim3 = {
   },
 };
 
-var timeline_test_trials_interim4 = {
-  timeline: [
-    test_causalratings_block_cue2,
-    test_frequency_block_cue2,
-  ],
-  data: {
-    phase: 'test',
-    testphase: '5'
-  },
-};
-
 var timeline_test_trials_final = {
     timeline: [
-      test_causalratings_block_cue2,
-      test_frequency_block_cue2,
+      test_causalratings_block_cue1,
+      test_frequency_block_cue1,
       test_openend_causalrelationship_cue1,
-      test_openend_causalrelationship_cue2,
       test_openend_othercauses,
       test_openend_cueofftrials,
     ],
     data: {
     phase: 'test',
-    testphase: '6'
+    testphase: '5'
   },
 };
 
@@ -1053,14 +1082,14 @@ var timeline_test_trials_final = {
       ],
     };
 
-    var timeline_training_instructions2 = {
-      timeline: [
-        training_instructions_newstim_delay,
-        training_instructions_newstim_prompt,
-        training_instructions_newstim_delay2,
-        training_instructions_newstim_prompt2,
-      ],
-    };
+    // var timeline_training_instructions2 = {
+    //   timeline: [
+    //     training_instructions_newstim_delay,
+    //     training_instructions_newstim_prompt,
+    //     training_instructions_newstim_delay2,
+    //     training_instructions_newstim_prompt2,
+    //   ],
+    // };
 
   //instruction check
   var Q0_text = "What is the aim of your task?";
@@ -1184,12 +1213,12 @@ var test_instructions_pretest2_prompt = {
     ]
   };
 
-  var timeline_test_instructions_pretest2 = {
-    timeline: [
-      test_instructions_pretest2_delay,
-      test_instructions_pretest2_prompt,
-    ]
-  };
+  // var timeline_test_instructions_pretest2 = {
+  //   timeline: [
+  //     test_instructions_pretest2_delay,
+  //     test_instructions_pretest2_prompt,
+  //   ]
+  // };
 
   // experiment finished instructions
   if (sample == "mturk") {
@@ -1264,9 +1293,6 @@ var test_instructions_pretest2_prompt = {
 
   timeline = timeline.concat(timeline_training_trials_phase2);
   timeline = timeline.concat(timeline_test_trials_interim2);
-
-  timeline = timeline.concat(timeline_training_instructions2)
-  timeline = timeline.concat(timeline_test_trials_pretest2);
 
   timeline = timeline.concat(timeline_training_trials_phase3);
   timeline = timeline.concat(timeline_test_trials_interim3);
