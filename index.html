@@ -79,10 +79,10 @@ preload_images = [
     var cb = 6;
   }
 
-    var blank = '<img src = resources/images/BLANK.png height = 250 width = 250> </img>'
+    var blank = '<img src = resources/images/BLANK.png height = 200 width = 200> </img>'
     var whitespace = '<p><font color = white> text </font></p>' //white space line for formatting
     var stim_off = '<img src = resources/images/GREY.png height = 200 width = 200> </img>';
-    var outcome_display = '<img src = resources/images/shock.png height = 250 width = 250> </img>';
+    var outcome_display = '<img src = resources/images/shock.png height = 200 width = 200> </img>';
     var outcome_text = "<p>Mr X was shocked!</p>";
     var nooutcome_text = '<p>Mr X was not shocked</p>';
 
@@ -165,13 +165,15 @@ preload_images = [
     type: "html-button-response",
     stimulus: stim_cue1 +
       whitespace +
-      blank +
+      // blank +
       whitespace,
     choices: [
       "No shock",
       "Shock"
     ],
-    prompt: "<p> </p>" +
+    prompt: 
+    "<p> </p>" +
+    blank +
     "<p>Do you predict there will be a shock or no shock?</p>"
   };
 
@@ -184,19 +186,8 @@ preload_images = [
     whitespace +
     whitespace,
     response_ends_trial: false,
-    trial_duration: 1000,
-  };
-
-  var outcome_cueon1_prompt = {
-    type: "html-keyboard-response",
-    stimulus: stim_cue1 +
-    whitespace +
-    outcome_display +
-    outcome_text +
-    whitespace +
-    "<p> Press the spacebar to continue </p>",
-    choices: [32],
-    post_trial_gap: 300,
+    trial_duration: 1500,
+    post_trial_gap: 500,
     on_finish: function (data) {
       trial_num++;
       // console.log(trial_num);
@@ -213,91 +204,14 @@ preload_images = [
     nooutcome_text +
     whitespace,
     response_ends_trial: false,
-    trial_duration: 1000
-  }
-
-  var nooutcome_cueon1_prompt = {
-    type: "html-keyboard-response",
-    stimulus: stim_cue1 +
-    whitespace +
-    blank +
-    whitespace +
-    nooutcome_text +
-    '<p> Press the spacebar to continue </p>',
-    choices: [32],
-    post_trial_gap: 300,
+    trial_duration: 1500,
+    post_trial_gap: 500,
     on_finish: function (data) {
       trial_num++;
       // console.log(trial_num);
       jsPsych.data.get().addToLast({ trial_num: trial_num });
     }
   };
-
-// second cue for second contingency
-  // var cueon2_display = {
-  //   type: "html-keyboard-response",
-  //   stimulus: stim_cue2 +
-  //     stim_cue_text +
-  //     blank +
-  //     whitespace +
-  //     whitespace,
-  //   response_ends_trial: false,
-  //   trial_duration: 1000
-  // };
-
-  // var outcome_cueon2_delay = {
-  //   type: "html-keyboard-response",
-  //   stimulus: stim_cue2 +
-  //   stim_cue_text +
-  //   outcome_display +
-  //   outcome_text +
-  //   whitespace,
-  //   response_ends_trial: false,
-  //   trial_duration: 1000,
-  // };
-
-  // var outcome_cueon2_prompt = {
-  //   type: "html-keyboard-response",
-  //   stimulus: stim_cue2 +
-  //   stim_cue_text +
-  //   outcome_display +
-  //   outcome_text +
-  //   "<p> Press the spacebar to continue </p>",
-  //   choices: [32],
-  //   post_trial_gap: 300,
-  //   on_finish: function (data) {
-  //     trial_num++;
-  //     // console.log(trial_num);
-  //     jsPsych.data.get().addToLast({ trial_num: trial_num });
-  //   }
-  // };
-
-  // var nooutcome_cueon2_delay = {
-  //   type: "html-keyboard-response",
-  //   stimulus: stim_cue2 +
-  //   stim_cue_text +
-  //   blank +
-  //   nooutcome_text +
-  //   whitespace,
-  //   response_ends_trial: false,
-  //   trial_duration: 1000
-  // }
-
-  // var nooutcome_cueon2_prompt = {
-  //   type: "html-keyboard-response",
-  //   stimulus: stim_cue2 +
-  //   stim_cue_text +
-  //   blank +
-  //   nooutcome_text +
-  //   '<p> Press the spacebar to continue </p>',
-  //   choices: [32],
-  //   post_trial_gap: 300,
-  //   on_finish: function (data) {
-  //     trial_num++;
-  //     // console.log(trial_num);
-  //     jsPsych.data.get().addToLast({ trial_num: trial_num });
-  //   }
-  // };
 
   var cueoff_display_delay = {
     type: "html-keyboard-response",
@@ -315,13 +229,15 @@ preload_images = [
     type: "html-button-response",
     stimulus: stim_off +
     whitespace +
-    blank +
+    // blank +
     whitespace ,
     choices: [
       "No shock",
       "Shock"
     ],
-    prompt: "<p> </p>" +
+    prompt: 
+    "<p> </p>" +
+    blank +
     "<p>Do you predict there will be a shock or no shock?</p>"
   };
 
@@ -334,19 +250,8 @@ preload_images = [
       outcome_text +
       whitespace,
     response_ends_trial: false,
-    trial_duration: 1000
-  };
-
-  var outcome_cueoff_prompt = {
-    type: "html-keyboard-response",
-    stimulus: stim_off +
-    whitespace +
-      outcome_display +
-      whitespace +
-      outcome_text +
-      "<p> Press the spacebar to continue </p>",
-    choices: [32],
-    post_trial_gap: 300,
+    trial_duration: 1500,
+    post_trial_gap: 500,
     on_finish: function (data) {
       trial_num++;
       // console.log(trial_num);
@@ -363,25 +268,14 @@ preload_images = [
     nooutcome_text +
     whitespace,
     response_ends_trial: false,
-    trial_duration: 1000
-  }
-
-  var nooutcome_cueoff_prompt = {
-    type: "html-keyboard-response",
-    stimulus: stim_off +
-    whitespace +
-    whitespace +
-    blank +
-    nooutcome_text +
-    '<p> Press the spacebar to continue </p>',
-    choices: [32],
-    post_trial_gap: 300,
+    trial_duration: 1500,
+    post_trial_gap: 500,
     on_finish: function (data) {
       trial_num++;
       // console.log(trial_num);
       jsPsych.data.get().addToLast({ trial_num: trial_num });
     }
-  };
+  }
 
   // set up training trials for A B C D cells (contingency table)
   trial_num = 0;
@@ -390,8 +284,7 @@ preload_images = [
       timeline: [
         cueon1_display_delay,
         cueon1_display_prompt,
-        outcome_cueon1_delay,
-        outcome_cueon1_prompt
+        outcome_cueon1_delay
       ],
       data: {
         phase: 'training',
@@ -403,8 +296,7 @@ preload_images = [
       timeline: [
         cueon1_display_delay,
         cueon1_display_prompt,
-        nooutcome_cueon1_delay,
-        nooutcome_cueon1_prompt
+        nooutcome_cueon1_delay
       ],
       data: {
         phase: 'training',
@@ -440,8 +332,7 @@ preload_images = [
       timeline: [
         cueoff_display_delay,
         cueoff_display_prompt,
-        outcome_cueoff_delay,
-        outcome_cueoff_prompt
+        outcome_cueoff_delay
       ],
       data: {
         phase: 'training',
@@ -453,8 +344,7 @@ preload_images = [
       timeline: [
         cueoff_display_delay,
         cueoff_display_prompt,
-        nooutcome_cueoff_delay,
-        nooutcome_cueoff_prompt
+        nooutcome_cueoff_delay
       ],
       data: {
         phase: 'training',
@@ -480,35 +370,24 @@ preload_images = [
 
   timeline_training_trials_phase1 = timeline_training_trials_phase1.concat(training_trials_phase1_introdelay);
 
-  var training_trials_phase3_introdelay = {
-    type: "html-keyboard-response",
-    stimulus: "<p> Thank you, the task will resume shortly </p>",
-    response_ends_trial: false,
-    trial_duration: 2000,
-    post_trial_gap: 500,
-  };
-
-  timeline_training_trials_phase3 = timeline_training_trials_phase3.concat(training_trials_phase3_introdelay);
-
-
 // input distribution of training trials per block (9/3/3/1)
 // lowered number of training trials because experiment has 6 training phases
   num_training_trialblocks = 2;
 
-  var pos_num_training_trialA = 7; 
-  var pos_num_training_trialB = 1; 
-  var pos_num_training_trialC = 1; 
-  var pos_num_training_trialD = 7;
+  var pos_num_training_trialA = 6; 
+  var pos_num_training_trialB = 2; 
+  var pos_num_training_trialC = 2; 
+  var pos_num_training_trialD = 6;
 
   var nul_num_training_trialA = 4; 
   var nul_num_training_trialB = 4; 
   var nul_num_training_trialC = 4; 
   var nul_num_training_trialD = 4;
 
-  var neg_num_training_trialA = 1; 
-  var neg_num_training_trialB = 7; 
-  var neg_num_training_trialC = 7; 
-  var neg_num_training_trialD = 1;
+  var neg_num_training_trialA = 2; 
+  var neg_num_training_trialB = 6; 
+  var neg_num_training_trialC = 6; 
+  var neg_num_training_trialD = 2;
 
   temp_training_blockorder_1 = [];
   temp_training_blockorder_2 = [];
@@ -599,7 +478,7 @@ for (var j = 1; j <= num_training_trialblocks; j++) {
     timeline_training_trials_phase2 = timeline_training_trials_phase2.concat(temp_training_blockorder_1);
 
     // randomize block again for phase 3
-    temp_training_blockorder_1 = jsPsych.randomization.shuffle(temp_training_blockorder_1);
+    temp_training_blockorder_2 = jsPsych.randomization.shuffle(temp_training_blockorder_2);
     timeline_training_trials_phase3 = timeline_training_trials_phase3.concat(temp_training_blockorder_2); 
 
     // use second contingency (null) and randomize block again for phase 4
